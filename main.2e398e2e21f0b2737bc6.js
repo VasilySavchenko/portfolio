@@ -78,7 +78,7 @@ const Heading = ({ message, className = '' }) => (0,jsx_runtime.jsx)("h1", Objec
 
 
 
-const Home = () => (0,jsx_runtime.jsxs)("section", Object.assign({ className: "home" }, { children: [(0,jsx_runtime.jsx)(Background, {}), (0,jsx_runtime.jsx)(Heading, { message: "Hi, I`m Vasyl, Front end developer" }), (0,jsx_runtime.jsx)(NavLinkWithDelay, { className: "home__contact-me", to: RoutesConfig.Contact.path, datatype: 'Contact Me' })] }));
+const Home = () => (0,jsx_runtime.jsxs)("section", Object.assign({ className: "home" }, { children: [(0,jsx_runtime.jsx)(Background, {}), (0,jsx_runtime.jsx)(Heading, { message: "Hi, I`m Vasyl, Front end developer" }), (0,jsx_runtime.jsx)(NavLinkWithDelay, { className: "home__contact-me", to: RouteConfig.Contact.path, datatype: 'Contact Me' })] }));
 
 ;// CONCATENATED MODULE: ./src/app/components/About/Description/index.tsx
 
@@ -211,40 +211,41 @@ const Contact = () => {
 
 
 
+/**
+ * ComponentRoutes holds all needed information to fill up routes config.
+ */
 class ComponentRoutes {
+    /** data route config*/
     constructor(path, element, children) {
         this.path = path;
         this.element = element;
         this.children = children;
     }
-    /** with is method that creates child sub routes path */
-    with(child, parrent) {
-        child.path = `${parrent.path}/${child.path}`;
-        return this;
+    /** Method for creating child sub-routes path */
+    with(child) {
+        return `${this.path}/${child.path}`;
     }
-    /** addChildren is method that adds children components to component */
+    /** Call with method for each child */
     addChildren(children) {
-        this.children = children.map((child) => child.with(child, this));
+        this.children = children;
         return this;
     }
 }
-/**
- * RoutesConfig contains information about all routes and subroutes.
- */
-class RoutesConfig {
+/** Route config implementation */
+class RouteConfig {
 }
-RoutesConfig.Home = new ComponentRoutes('/', (0,jsx_runtime.jsx)(Home, {}));
-RoutesConfig.About = new ComponentRoutes('/about', (0,jsx_runtime.jsx)(About, {}));
-RoutesConfig.Projects = new ComponentRoutes('/projects', (0,jsx_runtime.jsx)(Projects, {}));
-RoutesConfig.Contact = new ComponentRoutes('/contact-me', (0,jsx_runtime.jsx)(Contact, {}));
+RouteConfig.Home = new ComponentRoutes('/', (0,jsx_runtime.jsx)(Home, {}));
+RouteConfig.About = new ComponentRoutes('/about', (0,jsx_runtime.jsx)(About, {}));
+RouteConfig.Projects = new ComponentRoutes('/projects', (0,jsx_runtime.jsx)(Projects, {}));
+RouteConfig.Contact = new ComponentRoutes('/contact-me', (0,jsx_runtime.jsx)(Contact, {}));
 /** Routes is an array of logical router components */
-RoutesConfig.routes = [
-    RoutesConfig.Home,
-    RoutesConfig.About,
-    RoutesConfig.Projects,
-    RoutesConfig.Contact,
+RouteConfig.routes = [
+    RouteConfig.Home,
+    RouteConfig.About,
+    RouteConfig.Projects,
+    RouteConfig.Contact,
 ];
-const Switch = () => (0,jsx_runtime.jsx)(react_router/* Routes */.Z5, { children: RoutesConfig.routes.map((route, index) => (0,jsx_runtime.jsx)(react_router/* Route */.AW, { path: route.path, element: route.element, caseSensitive: false }, index)) });
+const Routes = () => (0,react_router/* useRoutes */.V$)(RouteConfig.routes);
 
 ;// CONCATENATED MODULE: ./src/app/components/common/Navbar/index.tsx
 
@@ -263,14 +264,14 @@ class NavigationLink {
 const Navbar = () => {
     const [isNavbarVisible, setIsNavbarVisible] = (0,react.useState)(false);
     const navLinks = [
-        new NavigationLink('About', RoutesConfig.About.path),
-        new NavigationLink('Projects', RoutesConfig.Projects.path),
-        new NavigationLink('Contact me', RoutesConfig.Contact.path),
+        new NavigationLink('About', RouteConfig.About.path),
+        new NavigationLink('Projects', RouteConfig.Projects.path),
+        new NavigationLink('Contact me', RouteConfig.Contact.path),
     ];
     const changeNavbarVisibility = () => {
         setIsNavbarVisible(prev => !prev);
     };
-    return ((0,jsx_runtime.jsxs)("nav", Object.assign({ className: "nav" }, { children: [(0,jsx_runtime.jsx)(NavLinkWithDelay, Object.assign({ className: "nav__link nav__logo", to: RoutesConfig.Home.path, datatype: "@Vasily_Savchenko", setIsNavbarVisible: setIsNavbarVisible }, { children: "@Vasily_Savchenko" })), (0,jsx_runtime.jsx)("ul", Object.assign({ className: `nav__list${isNavbarVisible ? '-active' : ''}` }, { children: navLinks.map((link) => (0,jsx_runtime.jsx)("li", Object.assign({ className: "nav__item" }, { children: (0,jsx_runtime.jsx)(NavLinkWithDelay, Object.assign({ to: link.url, className: "nav__link", datatype: link.label, setIsNavbarVisible: setIsNavbarVisible }, { children: link.label })) }), link.label)) })), (0,jsx_runtime.jsx)("img", { src: isNavbarVisible ? cross_namespaceObject : burger_namespaceObject, alt: "navbar control", className: "nav__control", onClick: changeNavbarVisibility })] })));
+    return ((0,jsx_runtime.jsxs)("nav", Object.assign({ className: "nav" }, { children: [(0,jsx_runtime.jsx)(NavLinkWithDelay, Object.assign({ className: "nav__link nav__logo", to: RouteConfig.Home.path, datatype: "@Vasily_Savchenko", setIsNavbarVisible: setIsNavbarVisible }, { children: "@Vasily_Savchenko" })), (0,jsx_runtime.jsx)("ul", Object.assign({ className: `nav__list${isNavbarVisible ? '-active' : ''}` }, { children: navLinks.map((link) => (0,jsx_runtime.jsx)("li", Object.assign({ className: "nav__item" }, { children: (0,jsx_runtime.jsx)(NavLinkWithDelay, Object.assign({ to: link.url, className: "nav__link", datatype: link.label, setIsNavbarVisible: setIsNavbarVisible }, { children: link.label })) }), link.label)) })), (0,jsx_runtime.jsx)("img", { src: isNavbarVisible ? cross_namespaceObject : burger_namespaceObject, alt: "navbar control", className: "nav__control", onClick: changeNavbarVisibility })] })));
 };
 
 ;// CONCATENATED MODULE: ./src/app/components/common/Loader/index.tsx
@@ -288,7 +289,7 @@ const Loader = () => (0,jsx_runtime.jsx)("section", Object.assign({ className: "
 
 function App() {
     const { isLoading } = (0,react.useContext)(LoaderContext);
-    return ((0,jsx_runtime.jsxs)(jsx_runtime.Fragment, { children: [(0,jsx_runtime.jsx)(Navbar, {}), (0,jsx_runtime.jsxs)("main", Object.assign({ className: "main" }, { children: [isLoading && (0,jsx_runtime.jsx)(Loader, {}), (0,jsx_runtime.jsx)(Switch, {})] }))] }));
+    return ((0,jsx_runtime.jsxs)(jsx_runtime.Fragment, { children: [(0,jsx_runtime.jsx)(Navbar, {}), (0,jsx_runtime.jsxs)("main", Object.assign({ className: "main" }, { children: [isLoading && (0,jsx_runtime.jsx)(Loader, {}), (0,jsx_runtime.jsx)(Routes, {})] }))] }));
 }
 /* harmony default export */ const app_App = (App);
 

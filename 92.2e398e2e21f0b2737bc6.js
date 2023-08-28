@@ -2430,15 +2430,14 @@ function createSearchParams(init) {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AW": () => (/* binding */ Route),
 /* harmony export */   "F0": () => (/* binding */ Router),
 /* harmony export */   "TH": () => (/* binding */ useLocation),
+/* harmony export */   "V$": () => (/* binding */ useRoutes),
 /* harmony export */   "WU": () => (/* binding */ useResolvedPath),
-/* harmony export */   "Z5": () => (/* binding */ Routes),
 /* harmony export */   "oQ": () => (/* binding */ useHref),
 /* harmony export */   "s0": () => (/* binding */ useNavigate)
 /* harmony export */ });
-/* unused harmony exports MemoryRouter, Navigate, Outlet, UNSAFE_LocationContext, UNSAFE_NavigationContext, UNSAFE_RouteContext, createRoutesFromChildren, generatePath, matchPath, matchRoutes, renderMatches, resolvePath, useInRouterContext, useMatch, useNavigationType, useOutlet, useOutletContext, useParams, useRoutes */
+/* unused harmony exports MemoryRouter, Navigate, Outlet, Route, Routes, UNSAFE_LocationContext, UNSAFE_NavigationContext, UNSAFE_RouteContext, createRoutesFromChildren, generatePath, matchPath, matchRoutes, renderMatches, resolvePath, useInRouterContext, useMatch, useNavigationType, useOutlet, useOutletContext, useParams */
 /* harmony import */ var history__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(682);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(294);
 /**
@@ -3299,14 +3298,14 @@ function Routes(_ref4) {
 
 function createRoutesFromChildren(children) {
   let routes = [];
-  react__WEBPACK_IMPORTED_MODULE_0__.Children.forEach(children, element => {
-    if (! /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.isValidElement)(element)) {
+  Children.forEach(children, element => {
+    if (! /*#__PURE__*/isValidElement(element)) {
       // Ignore non-elements. This allows people to more easily inline
       // conditionals in their route config.
       return;
     }
 
-    if (element.type === react__WEBPACK_IMPORTED_MODULE_0__.Fragment) {
+    if (element.type === Fragment) {
       // Transparently support React.Fragment and its children.
       routes.push.apply(routes, createRoutesFromChildren(element.props.children));
       return;
