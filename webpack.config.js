@@ -76,6 +76,9 @@ module.exports = (env, argv) => {
     const isProduction = argv.mode === 'production';
 
     return {
+        performance: {
+            hints: false, // или 'warning', 'error'
+        },
         entry: "./src/index.tsx",
         target: "web",
         watch: !isProduction,
