@@ -1,0 +1,71 @@
+@import "@/index.scss";
+
+.home-background {
+    position: absolute;
+    width: 100vw;
+    height: calc(100vh - 68px);
+    left: 0;
+    overflow: hidden;
+    z-index: -1;
+
+    &__wrapper {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        top: 50%;
+        transform: translateY(-50%);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        animation: fade-right 1.5s ease-in-out both;
+        clip-path: polygon(0% 0%, 50% 0, 50% 100%, 0% 100%);
+
+        &:last-child {
+            animation: fade-left 1.5s ease-in-out both;
+            clip-path: polygon(50% 0%, 100% 0, 100% 100%, 50% 100%);
+        }
+    }
+
+    &__text,
+    &__text-bordered {
+        position: relative;
+        font-size: 20rem;
+        line-height: 23rem;
+        color: #44444475;
+        -webkit-text-stroke-width: 1.5px;
+        -webkit-text-stroke-color: #44444475;
+        white-space: nowrap;
+        text-align: center;
+        animation: translate 60s 1.5s linear infinite both;
+    }
+
+    &__text {
+
+        &:last-child {
+            animation: translate-reversed 60s 1.5s linear infinite both;
+        }
+    }
+
+    &__text-bordered {
+        color: transparent;
+
+        &:last-child {
+            animation: translate-reversed 60s 1.5s linear infinite both;
+        }
+    }
+}
+
+@media (max-width: $phoneBreakPoint) {
+
+    .home-background {
+
+        &__text,
+        &__text-bordered {
+            font-size: 15rem;
+            line-height: 17rem;
+        }
+    }
+}

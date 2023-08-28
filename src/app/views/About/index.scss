@@ -1,0 +1,19 @@
+@import "@/index.scss";
+
+.about {
+    @extend %wrapper;
+
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+}
+
+@media (max-width: $tabletBreakPoint) {
+
+    .about {
+        padding: 40px 5%;
+        flex-direction: column;
+    }
+}

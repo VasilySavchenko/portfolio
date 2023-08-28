@@ -1,0 +1,119 @@
+@import "@/index.scss";
+
+.nav {
+    @extend %wrapper;
+
+    position: relative;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__logo {
+        animation: fade 0.3s linear both;
+    }
+
+    &__list,
+    &__list-active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        transition: height 0.3s ease-out;
+    }
+
+    &__item {
+        animation: fade 0.3s linear both;
+
+        @include listAnimationDelay(3, 0.2s, 0.1s);
+    }
+
+    &__link {
+        position: relative;
+        font-size: 24px;
+        line-height: 28px;
+        transition: color 0.3s ease-out;
+
+        &:before,
+        &:after {
+            content: attr(datatype);
+            left: 0;
+            top: 0;
+            width: 0;
+            position: absolute;
+            z-index: 3;
+            white-space: nowrap;
+            color: $redHightlightColor;
+            overflow: hidden;
+            transition: width 0.6s;
+        }
+
+        &:after {
+            color: $cyanHightlightColor;
+            transition: width 0.3s;
+            z-index: 2;
+        }
+
+        &:hover {
+
+            &:before,
+            &:after {
+                width: 100%;
+            }
+        }
+    }
+
+    &__link.active {
+        color: $redHightlightColor;
+    }
+
+    &__logo.active {
+        color: white;
+    }
+
+    &__control {
+        display: none;
+    }
+}
+
+@media (max-width: $phoneBreakPoint) {
+
+    .nav {
+
+        &__list,
+        &__list-active {
+            position: absolute;
+            top: 68px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 68px);
+            z-index: 3;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 0 5%;
+            overflow: hidden;
+            background-color: $mainBackgroundColor;
+        }
+
+        &__list {
+            height: 0;
+
+            .nav__item {
+                display: none;
+            }
+        }
+
+        &__item {
+            margin-top: 80px;
+
+            &:first-child {
+                margin-top: 200px;
+            }
+        }
+
+        &__control {
+            width: 21px;
+            display: block;
+        }
+    }
+}

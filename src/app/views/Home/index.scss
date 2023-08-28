@@ -1,0 +1,18 @@
+@import "@/index.scss";
+
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex-grow: 1;
+
+    @extend %wrapper;
+
+    &__contact-me {
+        @extend %contactButton;
+
+        margin-top: 50px;
+        animation: fade-right 0.3s 3.5s ease-out both;
+    }
+}
