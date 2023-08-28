@@ -1,41 +1,38 @@
-import { Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { RouteObject, useRoutes } from 'react-router-dom';
 
 import { Home } from '@/app/views/Home';
 import { About } from '@/app/views/About';
 import { Projects } from '@/app/views/Projects';
 import { Contact } from '@/app/views/Contact';
 
-export class ComponentRoutes {
+/**
+ * ComponentRoutes holds all needed information to fill up routes config.
+ */
+export class ComponentRoutes implements RouteObject {
+    /** data route config*/
     constructor(
         public path: string,
-        public element: JSX.Element,
+        public element: React.ReactNode,
         public children?: ComponentRoutes[]
     ) { }
-
-    /** with is method that creates child sub routes path */
+    /** Method for creating child sub-routes path */
     public with(
         child: ComponentRoutes,
-        parrent: ComponentRoutes
-    ): ComponentRoutes {
-        child.path = `${parrent.path}/${child.path}`;
-
-        return this;
+    ): string {
+        return `${this.path}/${child.path}`;
     }
-
-    /** addChildren is method that adds children components to component */
+    /** Call with method for each child */
     public addChildren(children: ComponentRoutes[]): ComponentRoutes {
-        this.children = children.map((child: ComponentRoutes) =>
-            child.with(child, this)
-        );
+        this.children = children;
 
         return this;
     }
 }
 
-/**
- * RoutesConfig contains information about all routes and subroutes.
- */
-export class RoutesConfig {
+/** Route config implementation */
+export class RouteConfig {
+
     public static Home = new ComponentRoutes(
         '/',
         <Home />
@@ -53,24 +50,16 @@ export class RoutesConfig {
         <Contact />
     );
 
+
+
+
     /** Routes is an array of logical router components */
     public static routes: ComponentRoutes[] = [
-        RoutesConfig.Home,
-        RoutesConfig.About,
-        RoutesConfig.Projects,
-        RoutesConfig.Contact,
+        RouteConfig.Home,
+        RouteConfig.About,
+        RouteConfig.Projects,
+        RouteConfig.Contact,
     ];
 }
 
-export const Switch = () =>
-    <Routes>
-        {RoutesConfig.routes.map(
-            (route: ComponentRoutes, index: number) =>
-                <Route
-                    key={index}
-                    path={route.path}
-                    element={route.element}
-                    caseSensitive={false}
-                />
-        )}
-    </Routes>;
+export const Routes = () => useRoutes(RouteConfig.routes);

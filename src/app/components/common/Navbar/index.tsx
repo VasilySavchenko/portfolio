@@ -3,7 +3,7 @@ import burger from '@static/images/navbar/burger.svg';
 import cross from '@static/images/navbar/cross.svg';
 import { NavLinkWithDelay } from '../DelayedLink';
 
-import { RoutesConfig } from '@/app/routes';
+import { RouteConfig } from '@/app/routes';
 
 
 import './index.scss';
@@ -18,9 +18,9 @@ class NavigationLink {
 export const Navbar = () => {
     const [isNavbarVisible, setIsNavbarVisible] = useState(false);
     const navLinks = [
-        new NavigationLink('About', RoutesConfig.About.path),
-        new NavigationLink('Projects', RoutesConfig.Projects.path),
-        new NavigationLink('Contact me', RoutesConfig.Contact.path),
+        new NavigationLink('About', RouteConfig.About.path),
+        new NavigationLink('Projects', RouteConfig.Projects.path),
+        new NavigationLink('Contact me', RouteConfig.Contact.path),
     ];
 
     const changeNavbarVisibility = () => {
@@ -31,7 +31,7 @@ export const Navbar = () => {
         <nav className="nav">
             <NavLinkWithDelay
                 className="nav__link nav__logo"
-                to={RoutesConfig.Home.path}
+                to={RouteConfig.Home.path}
                 datatype="@Vasily_Savchenko"
                 setIsNavbarVisible={setIsNavbarVisible}
             >
