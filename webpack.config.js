@@ -11,7 +11,10 @@ const PRODUCTION_PLUGINS = [
     new HtmlWebpackPlugin({
         title: "Portfolio",
         template: "./public/index.html",
-        minify: false,
+        minify: {
+            collapseWhitespace: true,
+            removeComments: true,
+        },
         favicon: "./src/app/static/images/favicon.ico"
     }),
     new CleanWebpackPlugin(),
@@ -56,7 +59,7 @@ const IMAGE_COMPRESSION = [
         loader: "image-webpack-loader",
         options: {
             mozjpeg: {
-                progressive: false,
+                progressive: true,
             },
             optipng: {
                 enabled: true,
@@ -83,7 +86,7 @@ module.exports = (env, argv) => {
         },
         output: {
             path: path.resolve(__dirname, "dist/"),
-            filename: "[name].[hash].js",
+            filename: isProduction ? "[name].[contenthash].js" : "[name].js",
             publicPath: "/",
         },
         plugins: isProduction ? PRODUCTION_PLUGINS : DEVELOPMENT_PLUGINS,
@@ -115,19 +118,11 @@ module.exports = (env, argv) => {
                 {
                     test: /\.(scss)$/,
                     exclude: /(node_modules)/,
-                    use: isProduction
-                        ?
-                        [
-                            MiniCssExtractPlugin.loader,
-                            "css-loader",
-                            "sass-loader",
-                        ]
-                        :
-                        [
-                            "style-loader",
-                            "css-loader",
-                            "sass-loader",
-                        ]
+                    use: [
+                        isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+                        "css-loader",
+                        "sass-loader",
+                    ],
                 },
                 {
                     test: /\.(css)$/,
@@ -155,14 +150,11 @@ module.exports = (env, argv) => {
                 },
                 {
                     test: /\.json$/,
-                    loader: 'json-loader',
-                    options: {
-                        esModule: true,
-                    },
                     type: 'javascript/auto',
+                    use: 'json-loader',
                 },
             ],
         },
         optimization: isProduction ? OPTIMISATION : {},
     };
-}
+};
