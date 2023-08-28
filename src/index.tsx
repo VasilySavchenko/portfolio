@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 
 import App from './app/App';
@@ -12,9 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
     <>
         <LoaderProvider>
-            <BrowserRouter>
+            <HashRouter>
                 <App />
-            </BrowserRouter>
+            </HashRouter>
         </LoaderProvider>
     </>
 );
