@@ -300,7 +300,7 @@ function App() {
 
 
 const root = client.createRoot(document.getElementById('root'));
-root.render((0,jsx_runtime.jsx)(jsx_runtime.Fragment, { children: (0,jsx_runtime.jsx)(LoaderProvider, { children: (0,jsx_runtime.jsx)(react_router_dom/* BrowserRouter */.VK, { children: (0,jsx_runtime.jsx)(app_App, {}) }) }) }));
+root.render((0,jsx_runtime.jsx)(jsx_runtime.Fragment, { children: (0,jsx_runtime.jsx)(LoaderProvider, { children: (0,jsx_runtime.jsx)(react_router_dom/* HashRouter */.UT, { children: (0,jsx_runtime.jsx)(app_App, {}) }) }) }));
 
 
 /***/ })

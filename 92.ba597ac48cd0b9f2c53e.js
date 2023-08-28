@@ -405,12 +405,12 @@ module.exports = new MediaQueryDispatch();
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
   "aU": () => (/* binding */ Action),
-  "lX": () => (/* binding */ createBrowserHistory),
+  "q_": () => (/* binding */ createHashHistory),
   "Ep": () => (/* binding */ createPath),
   "cP": () => (/* binding */ parsePath)
 });
 
-// UNUSED EXPORTS: createHashHistory, createMemoryHistory
+// UNUSED EXPORTS: createBrowserHistory, createMemoryHistory
 
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/extends.js
 function extends_extends() {
@@ -570,7 +570,7 @@ function createBrowserHistory(options) {
 
   if (index == null) {
     index = 0;
-    globalHistory.replaceState(extends_extends({}, globalHistory.state, {
+    globalHistory.replaceState(_extends({}, globalHistory.state, {
       idx: index
     }), '');
   }
@@ -585,7 +585,7 @@ function createBrowserHistory(options) {
       state = null;
     }
 
-    return readOnly(extends_extends({
+    return readOnly(_extends({
       pathname: location.pathname,
       hash: '',
       search: ''
@@ -816,7 +816,7 @@ function createHashHistory(options) {
 
   if (index == null) {
     index = 0;
-    globalHistory.replaceState(_extends({}, globalHistory.state, {
+    globalHistory.replaceState(extends_extends({}, globalHistory.state, {
       idx: index
     }), '');
   }
@@ -843,7 +843,7 @@ function createHashHistory(options) {
       state = null;
     }
 
-    return readOnly(_extends({
+    return readOnly(extends_extends({
       pathname: location.pathname,
       hash: '',
       search: ''
@@ -2051,9 +2051,9 @@ if (true) {
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "OL": () => (/* binding */ NavLink),
-/* harmony export */   "VK": () => (/* binding */ BrowserRouter)
+/* harmony export */   "UT": () => (/* binding */ HashRouter)
 /* harmony export */ });
-/* unused harmony exports HashRouter, Link, createSearchParams, unstable_HistoryRouter, useLinkClickHandler, useSearchParams */
+/* unused harmony exports BrowserRouter, Link, createSearchParams, unstable_HistoryRouter, useLinkClickHandler, useSearchParams */
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(294);
 /* harmony import */ var history__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(682);
 /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(974);
@@ -2135,21 +2135,21 @@ function BrowserRouter(_ref) {
     children,
     window
   } = _ref;
-  let historyRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  let historyRef = useRef();
 
   if (historyRef.current == null) {
-    historyRef.current = (0,history__WEBPACK_IMPORTED_MODULE_1__/* .createBrowserHistory */ .lX)({
+    historyRef.current = createBrowserHistory({
       window
     });
   }
 
   let history = historyRef.current;
-  let [state, setState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+  let [state, setState] = useState({
     action: history.action,
     location: history.location
   });
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(() => history.listen(setState), [history]);
-  return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router__WEBPACK_IMPORTED_MODULE_2__/* .Router */ .F0, {
+  useLayoutEffect(() => history.listen(setState), [history]);
+  return /*#__PURE__*/createElement(Router, {
     basename: basename,
     children: children,
     location: state.location,
@@ -2168,21 +2168,21 @@ function HashRouter(_ref2) {
     children,
     window
   } = _ref2;
-  let historyRef = useRef();
+  let historyRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
   if (historyRef.current == null) {
-    historyRef.current = createHashHistory({
+    historyRef.current = (0,history__WEBPACK_IMPORTED_MODULE_1__/* .createHashHistory */ .q_)({
       window
     });
   }
 
   let history = historyRef.current;
-  let [state, setState] = useState({
+  let [state, setState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     action: history.action,
     location: history.location
   });
-  useLayoutEffect(() => history.listen(setState), [history]);
-  return /*#__PURE__*/createElement(Router, {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(() => history.listen(setState), [history]);
+  return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router__WEBPACK_IMPORTED_MODULE_2__/* .Router */ .F0, {
     basename: basename,
     children: children,
     location: state.location,
